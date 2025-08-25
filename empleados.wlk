@@ -1,34 +1,55 @@
 object galvan {
     var sueldo = 15000
+    var deuda = 0
+    var dinero = 0
 
-    method sueldo (){
+    method sueldo() {
         return sueldo
     }
 
-    method actualizarSueldo(_nuevoSueldo){
+    method actualizarSueldo(_nuevoSueldo) {
         sueldo = _nuevoSueldo
     }
-    method cobrar(){
-        
+
+    method cobrar() {
+        if (self.sueldo() >= self.deuda()) {
+            dinero = dinero + (self.sueldo() - self.deuda())
+            deuda = 0
+        } else {
+            deuda = self.deuda() - self.sueldo()
+        }
+    }
+
+    method deuda() { return deuda }
+    method dinero() { return dinero }
+
+    method gastar(monto) {
+        if (monto <= self.dinero()) {
+            dinero = dinero - monto
+        } else {
+            var montoAdeudado = monto - dinero
+            dinero = 0
+            deuda = deuda + montoAdeudado
+        }
     }
 }
 
 object baigorria {
-   const gananciaPorEmpandaVendida = 15
-   var cantidadDeEmpandasVendidas = 0
+   const gananciaPorEmpanadaVendida = 15
+   var cantidadDeEmpanadasVendidas = 0
    var totalCobrado = 0
    
    method sueldo() {
-      return cantidadDeEmpandasVendidas * gananciaPorEmpandaVendida
+      return cantidadDeEmpanadasVendidas * gananciaPorEmpanadaVendida
    }
 
-   method numeroDeEmpanadasVendidas(_cantidadDeEmpandasVendidas) {
-      cantidadDeEmpandasVendidas = cantidadDeEmpandasVendidas + _cantidadDeEmpandasVendidas 
+   method numeroDeEmpanadasVendidas(_cantidad) {
+      cantidadDeEmpanadasVendidas = cantidadDeEmpanadasVendidas + _cantidad
    }
 
    method cobrar() {
       totalCobrado = totalCobrado + self.sueldo()
-      cantidadDeEmpandasVendidas = 0   // reinicia cantDeEmpVend para el próximo mes.
+      cantidadDeEmpanadasVendidas = 0   
    }
 
    method totalCobrado() {
@@ -36,16 +57,16 @@ object baigorria {
    }
 }
 
-
 object gimenez {
     var fondoDeSueldos = 300000
 
-    method fondoParaSueldos () {
+    method fondoParaSueldos() {
         return fondoDeSueldos
     }
 
     method pagarSueldoA(empleado){
         fondoDeSueldos = fondoDeSueldos - empleado.sueldo()
-        empleado.cobrar().
+        empleado.cobrar()
     }
 }
+
