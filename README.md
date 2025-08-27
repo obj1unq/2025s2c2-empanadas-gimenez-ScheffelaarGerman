@@ -39,9 +39,9 @@ Ahora queremos agregar al modelo aquellos que hacen los empleados cuando cobran 
 
 ## Manejo fino de las finanzas de Galván
 
-Modificar el comportamiento de Galván para que maneje sus gastos, el dinero que tiene, y su deuda. Cuando Galván gasta, se descuenta de su dinero, si no le alcanza aumenta la deuda. Cuando cobra un sueldo, Galván paga sus deudas. Si sobra algo, se suma al dinero que tiene. Agregar a Galván la capacidad de entender los mensajes: `gastar(cuanto)`, `deuda()`, `dinero()`.
 
-Tener en cuenta este escenario
+Tener en cuenta esteModificar el comportamiento de Galván para que maneje sus gastos, el dinero que tiene, y su deuda. Cuando Galván gasta, se descuenta de su dinero, si no le alcanza aumenta la deuda. Cuando cobra un sueldo, Galván paga sus deudas. Si sobra algo, se suma al dinero que tiene. Agregar a Galván la capacidad de entender los mensajes: `gastar(cuanto)`, `deuda()`, `dinero()`.
+ escenario
 1. Galván arranca con deuda en 0 y dinero en 0. Su sueldo (que aún no cobró) es de 15000.
 1. Galván gasta 4000, `deuda()` debe ser 4000, `dinero()` debe ser 0.
 1. Galván gasta otros 8000, `deuda()` pasa a 12000, `dinero()` sigue en 0.

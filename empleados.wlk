@@ -1,72 +1,79 @@
-object galvan {
-    var sueldo = 15000
-    var deuda = 0
-    var dinero = 0
+object gimenez {
+    var fondo = 300000
 
-    method sueldo() {
-        return sueldo
+    method pagarSueldo(empleado) {
+        fondo = fondo - empleado.sueldo()
+        empleado.cobrar()
     }
 
-    method actualizarSueldo(_nuevoSueldo) {
-        sueldo = _nuevoSueldo
-    }
-
-    method cobrar() {
-        if (self.sueldo() >= self.deuda()) {
-            dinero = dinero + (self.sueldo() - self.deuda())
-            deuda = 0
-        } else {
-            deuda = self.deuda() - self.sueldo()
-        }
-    }
-
-    method deuda() { return deuda }
-    method dinero() { return dinero }
-
-    method gastar(monto) {
-        if (monto <= self.dinero()) {
-            dinero = dinero - monto
-        } else {
-            var montoAdeudado = monto - dinero
-            dinero = 0
-            deuda = deuda + montoAdeudado
-        }
+    method fondo() {
+        return fondo
     }
 }
 
 object baigorria {
-   const gananciaPorEmpanadaVendida = 15
-   var cantidadDeEmpanadasVendidas = 0
-   var totalCobrado = 0
-   
-   method sueldo() {
-      return cantidadDeEmpanadasVendidas * gananciaPorEmpanadaVendida
-   }
+    const valorPorEmpanada = 15
+    var cantidadDeEmpanadas = 0
+    var sueldoTotal = 0
 
-   method numeroDeEmpanadasVendidas(_cantidad) {
-      cantidadDeEmpanadasVendidas = cantidadDeEmpanadasVendidas + _cantidad
-   }
-
-   method cobrar() {
-      totalCobrado = totalCobrado + self.sueldo()
-      cantidadDeEmpanadasVendidas = 0   
-   }
-
-   method totalCobrado() {
-      return totalCobrado
-   }
-}
-
-object gimenez {
-    var fondoDeSueldos = 300000
-
-    method fondoParaSueldos() {
-        return fondoDeSueldos
+    method vender(_cantidadDeEmpanadas) {
+        cantidadDeEmpanadas = cantidadDeEmpanadas + _cantidadDeEmpanadas
     }
 
-    method pagarSueldoA(empleado){
-        fondoDeSueldos = fondoDeSueldos - empleado.sueldo()
-        empleado.cobrar()
+    method sueldo() {
+        return valorPorEmpanada * cantidadDeEmpanadas
+    }
+
+    method cobrar (){
+        sueldoTotal = sueldoTotal + self.sueldo()
+        cantidadDeEmpanadas = 0
+
+    }
+
+    method totalCobrado() {
+        return sueldoTotal
     }
 }
+
+object galvan {
+    var sueldo = 15000
+    var dinero = 0
+    var deuda = 0
+    method nuevoSueldo(_nuevoSueldo) {
+        sueldo = _nuevoSueldo
+    }
+
+    method sueldo() {
+        return sueldo
+    }
+    
+    method dinero(){
+        return dinero 
+    }
+
+    method deuda(){
+        return deuda
+    }
+    
+method gastar(cuanto) {
+        if (dinero >= cuanto) {
+            dinero = dinero - cuanto
+        } else {
+            deuda = deuda + (cuanto - dinero)
+            dinero = 0
+        }
+    }
+
+    method cobrar() {
+        if (deuda >= sueldo) {
+            deuda = deuda - sueldo
+        } else {
+            dinero = dinero + (sueldo - deuda)
+            deuda = 0
+        }
+    }
+
+}
+
+
 
