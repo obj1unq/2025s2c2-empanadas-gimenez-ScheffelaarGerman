@@ -1,0 +1,26 @@
+import empleados.*   
+
+describe "Tests de Gimenez" {
+
+  test "Gimenez paga sueldo a Baigorria con fondos suficientes" {
+    baigorria.vender(10)         
+    gimenez.fondo(300000)        
+    gimenez.pagarSueldo(baigorria)
+
+    assert.equals(299850, gimenez.fondo())   
+    assert.equals(150, baigorria.totalCobrado())
+    assert.equals(0, baigorria.sueldo())
+    assert.equals(0, baigorria.cantidadDeEmpandas())      
+  }
+
+  test "Gimenez no puede pagar a Galvan sin fondos" {
+    galvan.nuevoSueldo(200000)     
+    gimenez.fondo(10000)           
+
+    assert.throwsException({ gimenez.pagarSueldo(galvan) })
+
+    assert.equals(10000, gimenez.fondo())
+    assert.equals(0, galvan.dinero())
+    assert.equals(0, galvan.deuda())
+  }
+}

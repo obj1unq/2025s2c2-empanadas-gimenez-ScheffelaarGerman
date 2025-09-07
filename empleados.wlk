@@ -2,10 +2,22 @@ object gimenez {
     var fondo = 300000
 
     method pagarSueldo(empleado) {
+        self.validarPagarSueldo(empleado)
         fondo = fondo - empleado.sueldo()
         empleado.cobrar()
     }
-
+    method validarPagarSueldo(empleado){
+        if (not self.puedePagar(empleado)){
+            self.error ("No hay dinero suficiente para pagar" + empleado.sueldo())
+            self.error("Fondos insuficientes: Fondo=" + fondo + ", Sueldo=" + empleado.sueldo())
+        }
+    }
+    method puedePagar(empleado){
+        return fondo >= empleado.sueldo()
+    }
+    method fondo (_fondo){
+        fondo = _fondo
+    }
     method fondo() {
         return fondo
     }
@@ -33,6 +45,10 @@ object baigorria {
     method totalCobrado() {
         return sueldoTotal
     }
+    method cantidadDeEmpandas(){
+        return cantidadDeEmpanadas
+    }
+    
 }
 
 object galvan {
